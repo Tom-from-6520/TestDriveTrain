@@ -4,7 +4,6 @@ package org.usfirst.frc.team6520.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team6520.robot.Robot;
-import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 /**
  *
@@ -21,7 +20,7 @@ public class C_DriveByPower extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	Robot.ss_DriveTrain.driveByJoystick(0.9);
     }
 
     // Make this return true when this Command no longer needs to run execute()

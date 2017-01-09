@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team6520.robot.commands.C_DriveByPower;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
