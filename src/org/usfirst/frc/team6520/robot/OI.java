@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6520.robot;
 
-import org.usfirst.frc.team6520.robot.commands.C_DriveByPower;
+import org.usfirst.frc.team6520.robot.commands.C_DriveByTime;
+import org.usfirst.frc.team6520.robot.commands.C_DriveByTwoJoysticks;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -40,13 +41,19 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	
-	Joystick joystick = new Joystick(0);
+	public Joystick joystick = new Joystick(ControllerMap.DRIVE_CONTROLLER);
 	
-	Button button1 = new JoystickButton(joystick, 8);
+	Button button1 = new JoystickButton(joystick, 1);
+	Button button2 = new JoystickButton(joystick, 2);
+	Button button6 = new JoystickButton(joystick, 6);
+	
 	
 	public OI() {
-		button1.whenPressed(new C_DriveByPower(0.9));
+		button1.whileHeld(new C_DriveByTime(RobotConstants.DEFAULT_POWER));
+		button6.whileHeld(new C_DriveByTwoJoysticks());
+		
 	}
+
 	
 	
 }

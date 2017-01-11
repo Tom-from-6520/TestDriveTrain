@@ -1,12 +1,12 @@
 
 package org.usfirst.frc.team6520.robot;
 
+import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,9 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final SS_DriveTrain  ss_DriveTrain = new SS_DriveTrain();
 	public static OI oi;
 
+	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
+	
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -30,6 +31,14 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    
+    
+    public void sDashboard() {
+    	SmartDashboard.putNumber("Joystick Y", oi.joystick.getY());
+    	SmartDashboard.putNumber("Joystick Z", oi.joystick.getZ());
+    }
+    
+    
     public void robotInit() {
 		oi = new OI();
         chooser = new SendableChooser();
@@ -37,6 +46,8 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putNumber("spinTime", 3);
         SmartDashboard.putData("Auto mode", chooser);
+        
+        System.out.println("test");
     }
 	
 	/**
@@ -98,6 +109,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	sDashboard();
         Scheduler.getInstance().run();
     }
     
