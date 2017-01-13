@@ -1,6 +1,8 @@
 package org.usfirst.frc.team6520.robot.subsystems;
 
+import org.usfirst.frc.team6520.robot.RobotConstants;
 import org.usfirst.frc.team6520.robot.RobotMap;
+import org.usfirst.frc.team6520.robot.commands.C_DriveByTwoJoysticks;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,6 +27,7 @@ public class SS_DriveTrain extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
+    	setDefaultCommand(new C_DriveByTwoJoysticks(RobotConstants.DEFAULT_POWER));
     }
 }
 
