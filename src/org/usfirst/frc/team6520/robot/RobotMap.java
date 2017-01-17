@@ -20,14 +20,18 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	
-	public final static int FRONT_RIGHT_MOTOR_PORT = 1;
-	public final static int FRONT_LEFT_MOTOR_PORT = 3;
-	public final static int BACK_RIGHT_MOTOR_PORT = 0;
-	public final static int BACK_LEFT_MOTOR_PORT = 2;
+	private final static int FRONT_RIGHT_MOTOR_PORT = 0;
+	private final static int FRONT_LEFT_MOTOR_PORT = 2;
+	private final static int BACK_RIGHT_MOTOR_PORT = 1;
+	private final static int BACK_LEFT_MOTOR_PORT = 3;
 	
 	public static VictorSP FrontLeftMotor = new VictorSP(FRONT_LEFT_MOTOR_PORT);
 	public static VictorSP FrontRightMotor = new VictorSP(FRONT_RIGHT_MOTOR_PORT);
 	public static VictorSP BackLeftMotor = new VictorSP(BACK_LEFT_MOTOR_PORT);
 	public static VictorSP BackRightMotor = new VictorSP(BACK_RIGHT_MOTOR_PORT);
 	
+	
+	private final static int CLIMBING_MOTOR = 4;
+	
+	public static VictorSP ClimbingMotor = new VictorSP(CLIMBING_MOTOR);
 }

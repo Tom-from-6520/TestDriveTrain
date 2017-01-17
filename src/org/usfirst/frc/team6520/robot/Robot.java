@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team6520.robot;
 
+import org.usfirst.frc.team6520.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -21,10 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static RobotDrive driver;
 	public static OI oi;
 
 	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
+	public static SS_Climber ss_Climber = new SS_Climber();
 	
     Command autonomousCommand;
     SendableChooser chooser;
