@@ -4,6 +4,8 @@ package org.usfirst.frc.team6520.robot;
 import org.usfirst.frc.team6520.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -42,6 +44,10 @@ public class Robot extends IterativeRobot {
     
     
     public void robotInit() {
+    	
+    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    	camera.setResolution(1690, 1260);
+    	
 		oi = new OI();
         chooser = new SendableChooser();
 //        chooser.addDefault("Default Auto", new C_DriveByPower(0.9));
