@@ -4,7 +4,7 @@ package org.usfirst.frc.team6520.robot;
 import org.usfirst.frc.team6520.robot.commands.C_ClimbByTime;
 import org.usfirst.frc.team6520.robot.commands.C_DriveByOneJoystick;
 import org.usfirst.frc.team6520.robot.commands.C_DriveByTime;
-import org.usfirst.frc.team6520.robot.commands.C_TurnByTime;
+import org.usfirst.frc.team6520.robot.commands.C_ReleaseGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -54,21 +54,18 @@ public class OI {
 	Button button6 = new JoystickButton(joystick, 6);
 	
 	
-	
-	
 //	for the love of the world, only one command that requires a certain subsystem is allowed to be executed 
 //	when a button be pressed
 	
 	public OI() {
 		
 		button1.whileHeld(new C_DriveByTime());
-		button2.whileHeld(new C_TurnByTime());
+		button2.whileHeld(new C_ReleaseGear());
 		button3.whileHeld(new C_DriveByOneJoystick());
 		button4.whileHeld(new C_ClimbByTime());
 		
 	}
 
-	
 	
 }
 

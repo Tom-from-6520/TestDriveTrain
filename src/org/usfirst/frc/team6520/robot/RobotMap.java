@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6520.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -34,4 +35,10 @@ public class RobotMap {
 	private final static int CLIMBING_MOTOR = 4;
 	
 	public static VictorSP ClimbingMotor = new VictorSP(CLIMBING_MOTOR);
+	
+	private final static int FORWARD_ARM_PORT = 6;
+	private final static int REVERSE_ARM_PORT = 7;
+	
+	public static DoubleSolenoid solenoid = new DoubleSolenoid(FORWARD_ARM_PORT, REVERSE_ARM_PORT);
+	
 }
