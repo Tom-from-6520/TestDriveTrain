@@ -39,6 +39,6 @@ public class RobotMap {
 	private final static int FORWARD_ARM_PORT = 6;
 	private final static int REVERSE_ARM_PORT = 7;
 	
-	public static DoubleSolenoid solenoid = new DoubleSolenoid(FORWARD_ARM_PORT, REVERSE_ARM_PORT);
+	public static DoubleSolenoid Solenoid = new DoubleSolenoid(FORWARD_ARM_PORT, REVERSE_ARM_PORT);
 	
 }

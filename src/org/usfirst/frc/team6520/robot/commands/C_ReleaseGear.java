@@ -17,11 +17,11 @@ public class C_ReleaseGear extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	RobotMap.Solenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	RobotMap.solenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,6 +36,6 @@ public class C_ReleaseGear extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	RobotMap.solenoid.set(DoubleSolenoid.Value.kReverse);
+    	RobotMap.Solenoid.set(DoubleSolenoid.Value.kReverse);
     }
 }

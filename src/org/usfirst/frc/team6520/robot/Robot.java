@@ -1,14 +1,21 @@
 
 package org.usfirst.frc.team6520.robot;
 
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_DriveOneSecDefaultPow;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Spin180Degrees;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_SpinOneSecDefaultPow;
 import org.usfirst.frc.team6520.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PortsJNI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -28,6 +35,8 @@ public class Robot extends IterativeRobot {
 	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
 	public static SS_Climber ss_Climber = new SS_Climber();
 	
+	public static ADXRS450_Gyro gyro;
+	
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -38,8 +47,13 @@ public class Robot extends IterativeRobot {
     
     
     public void sDashboard() {
-    	SmartDashboard.putNumber("Joystick Y", oi.joystick.getY());
-    	SmartDashboard.putNumber("Joystick Z", oi.joystick.getZ());
+//    	SmartDashboard.putNumber("Joystick Y", oi.joystick.getY());
+//    	SmartDashboard.putNumber("Joystick Z", oi.joystick.getZ());
+    	
+    	
+    	gyro = new ADXRS450_Gyro(Port.kMXP);
+    	SmartDashboard.putNumber("angle", gyro.getAngle());
+    	SmartDashboard.putNumber("rate of rotation", gyro.getRate());
     }
     
     
@@ -81,7 +95,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+//        autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -94,6 +108,13 @@ public class Robot extends IterativeRobot {
 			break;
 		} */
     	
+        
+//      autonomousCommand = new AC_Example();
+//    	autonomousCommand = new AC_DriveOneSecDefaultPow();
+//    	autonomousCommand = new AC_SpinOneSecDefaultPow();
+    	autonomousCommand = new AC_Spin180Degrees();
+        
+        
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -102,6 +123,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	
+        SmartDashboard.putNumber("spinTime", 3);
+        SmartDashboard.putData("Auto mode", chooser);
+        
         Scheduler.getInstance().run();
     }
 

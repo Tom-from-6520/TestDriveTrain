@@ -56,7 +56,7 @@ public class C_DriveByOneJoystick extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+//		Robot.ss_DriveTrain.drive(0, 0);
 		isFinished = true;
-		Robot.ss_DriveTrain.drive(0, 0);
 	}
 }
