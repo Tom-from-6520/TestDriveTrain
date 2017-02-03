@@ -5,6 +5,7 @@ import org.usfirst.frc.team6520.robot.Robot;
 import org.usfirst.frc.team6520.robot.RobotConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -39,6 +40,8 @@ public class C_DriveByTwoJoysticks extends Command {
 
 		Robot.ss_DriveTrain.drive(leftInput, rightInput);
 
+    	SmartDashboard.putNumber("angle", Robot.gyro.getAngle());
+    	SmartDashboard.putNumber("rate of rotation", Robot.gyro.getRate());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

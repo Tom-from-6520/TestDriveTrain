@@ -9,13 +9,11 @@ import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.hal.PortsJNI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
 	public static SS_Climber ss_Climber = new SS_Climber();
 	
-	public static ADXRS450_Gyro gyro;
+	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -46,30 +44,24 @@ public class Robot extends IterativeRobot {
      */
     
     
-    public void sDashboard() {
-//    	SmartDashboard.putNumber("Joystick Y", oi.joystick.getY());
-//    	SmartDashboard.putNumber("Joystick Z", oi.joystick.getZ());
-    	
-    	
-    	gyro = new ADXRS450_Gyro(Port.kMXP);
-    	SmartDashboard.putNumber("angle", gyro.getAngle());
-    	SmartDashboard.putNumber("rate of rotation", gyro.getRate());
+    public void initCamera() {
+    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    	camera.setResolution(1280, 720);
     }
     
     
     public void robotInit() {
     	
-    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    	camera.setResolution(1690, 1260);
+    	initCamera();
     	
 		oi = new OI();
         chooser = new SendableChooser();
+        
 //        chooser.addDefault("Default Auto", new C_DriveByPower(0.9));
 //        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putNumber("spinTime", 3);
+        
         SmartDashboard.putData("Auto mode", chooser);
         
-        System.out.println("test");
     }
 	
 	/**
@@ -78,7 +70,6 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
     }
 	
 	public void disabledPeriodic() {
@@ -110,9 +101,9 @@ public class Robot extends IterativeRobot {
     	
         
 //      autonomousCommand = new AC_Example();
-//    	autonomousCommand = new AC_DriveOneSecDefaultPow();
+    	autonomousCommand = new AC_DriveOneSecDefaultPow();
 //    	autonomousCommand = new AC_SpinOneSecDefaultPow();
-    	autonomousCommand = new AC_Spin180Degrees();
+//    	autonomousCommand = new AC_Spin180Degrees();
         
         
     	// schedule the autonomous command (example)
@@ -124,7 +115,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	
-        SmartDashboard.putNumber("spinTime", 3);
         SmartDashboard.putData("Auto mode", chooser);
         
         Scheduler.getInstance().run();
@@ -142,7 +132,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	sDashboard();
         Scheduler.getInstance().run();
     }
     

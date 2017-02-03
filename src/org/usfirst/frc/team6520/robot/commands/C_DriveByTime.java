@@ -2,6 +2,7 @@
 package org.usfirst.frc.team6520.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team6520.robot.ControllerMap;
 import org.usfirst.frc.team6520.robot.Robot;
@@ -31,6 +32,9 @@ public class C_DriveByTime extends Command {
 		power = RobotConstants.DEFAULT_POWER + Robot.oi.joystick.getRawAxis(ControllerMap.R_TRIGGER)
 				* (RobotConstants.FULL_POWER - RobotConstants.DEFAULT_POWER);
 		Robot.ss_DriveTrain.drive(power, power);
+
+    	SmartDashboard.putNumber("angle", Robot.gyro.getAngle());
+    	SmartDashboard.putNumber("rate of rotation", Robot.gyro.getRate());
 
 	}
 
