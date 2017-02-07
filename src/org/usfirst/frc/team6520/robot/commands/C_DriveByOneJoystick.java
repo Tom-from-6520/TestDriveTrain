@@ -1,8 +1,8 @@
 package org.usfirst.frc.team6520.robot.commands;
 
-import org.usfirst.frc.team6520.robot.ControllerMap;
+import org.usfirst.frc.team6520.robot.Constants;
 import org.usfirst.frc.team6520.robot.Robot;
-import org.usfirst.frc.team6520.robot.RobotConstants;
+import org.usfirst.frc.team6520.robot.oi.OI_Gamepad;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,15 +32,15 @@ public class C_DriveByOneJoystick extends Command {
 		// the input is the sum of the default speed provided by the stick and
 		// the ramping speed added by the trigger
 
-		leftInput = (Robot.oi.joystick.getRawAxis(ControllerMap.LX_AXIS)
-				- Robot.oi.joystick.getRawAxis(ControllerMap.LY_AXIS))
-				* (RobotConstants.DEFAULT_POWER + Robot.oi.joystick.getRawAxis(ControllerMap.R_TRIGGER)
-						* (RobotConstants.FULL_POWER - RobotConstants.DEFAULT_POWER));
+		leftInput = (Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LX_AXIS)
+				- Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LY_AXIS))
+				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRawAxis(OI_Gamepad.R_TRIGGER)
+						* (Constants.FULL_POWER - Constants.DEFAULT_POWER));
 		
-		rightInput = (-Robot.oi.joystick.getRawAxis(ControllerMap.LX_AXIS)
-				- Robot.oi.joystick.getRawAxis(ControllerMap.LY_AXIS))
-				* (RobotConstants.DEFAULT_POWER + Robot.oi.joystick.getRawAxis(ControllerMap.R_TRIGGER)
-						* (RobotConstants.FULL_POWER - RobotConstants.DEFAULT_POWER));
+		rightInput = (-Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LX_AXIS)
+				- Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LY_AXIS))
+				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRawAxis(OI_Gamepad.R_TRIGGER)
+						* (Constants.FULL_POWER - Constants.DEFAULT_POWER));
 		
 		Robot.ss_DriveTrain.drive(leftInput, rightInput);
 

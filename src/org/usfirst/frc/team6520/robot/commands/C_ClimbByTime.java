@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6520.robot.commands;
 
+import org.usfirst.frc.team6520.robot.Constants;
 import org.usfirst.frc.team6520.robot.Robot;
-import org.usfirst.frc.team6520.robot.RobotConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,7 +21,7 @@ public class C_ClimbByTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_Climber.Climb(RobotConstants.FULL_POWER);
+    	Robot.ss_Climber.Climb(Constants.FULL_POWER);
     }
 
     // Make this return true when this Command no longer needs to run execute()

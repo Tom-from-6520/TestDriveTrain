@@ -4,9 +4,9 @@ package org.usfirst.frc.team6520.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team6520.robot.ControllerMap;
+import org.usfirst.frc.team6520.robot.Constants;
 import org.usfirst.frc.team6520.robot.Robot;
-import org.usfirst.frc.team6520.robot.RobotConstants;
+import org.usfirst.frc.team6520.robot.oi.OI_Gamepad;
 
 /**
  *
@@ -29,8 +29,8 @@ public class C_DriveByTime extends Command {
 		// the input is the sum of the default speed and the ramping speed added
 		// by the trigger
 
-		power = RobotConstants.DEFAULT_POWER + Robot.oi.joystick.getRawAxis(ControllerMap.R_TRIGGER)
-				* (RobotConstants.FULL_POWER - RobotConstants.DEFAULT_POWER);
+		power = Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRawAxis(OI_Gamepad.R_TRIGGER)
+				* (Constants.FULL_POWER - Constants.DEFAULT_POWER);
 		Robot.ss_DriveTrain.drive(power, power);
 
     	SmartDashboard.putNumber("angle", Robot.gyro.getAngle());

@@ -1,9 +1,10 @@
 
 package org.usfirst.frc.team6520.robot;
 
-import org.usfirst.frc.team6520.robot.autonomous_commands.AC_DriveOneSecDefaultPow;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_DriveThreeSecsDefaultPow;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Example;
 import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Spin180Degrees;
-import org.usfirst.frc.team6520.robot.autonomous_commands.AC_SpinOneSecDefaultPow;
+import org.usfirst.frc.team6520.robot.oi.OI;
 import org.usfirst.frc.team6520.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
 
@@ -11,6 +12,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -28,6 +30,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+	public static RobotDrive driver;
+	
 	public static OI oi;
 
 	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
@@ -36,31 +40,35 @@ public class Robot extends IterativeRobot {
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 	
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser<String> chooser;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    
-    
+
     public void initCamera() {
     	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
     	camera.setResolution(1280, 720);
     }
     
-    
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
     public void robotInit() {
     	
-    	initCamera();
+//    	initCamera();
     	
 		oi = new OI();
-        chooser = new SendableChooser();
+		
+		driver = new RobotDrive(RobotMap.FrontLeftMotor, RobotMap.BackLeftMotor, RobotMap.FrontRightMotor, RobotMap.BackRightMotor);
+		
+        chooser = new SendableChooser<String>();
         
-//        chooser.addDefault("Default Auto", new C_DriveByPower(0.9));
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        
+        chooser.addDefault("spin", "spin");
+        chooser.addObject("spin", "spin");
+        chooser.addObject("drive", "drive");
+        chooser.addObject("example", "example");
         SmartDashboard.putData("Auto mode", chooser);
+        
+        
         
     }
 	
@@ -88,20 +96,27 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
 //        autonomousCommand = (Command) chooser.getSelected();
         
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 String autoSelected = (String) chooser.getSelected();
+		 SmartDashboard.putString("auto mode", autoSelected);
+		 
 		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
+		case "drive":
+			autonomousCommand = new AC_DriveThreeSecsDefaultPow();
 			break;
-		case "Default Auto":
+		case "spin":
+			autonomousCommand = new AC_Spin180Degrees();
+			break;
+		case "example":
+			autonomousCommand = new AC_Example();
+			break;
 		default:
-			autonomousCommand = new ExampleCommand();
+			autonomousCommand = null;
 			break;
-		} */
+		} 
     	
         
 //      autonomousCommand = new AC_Example();
-    	autonomousCommand = new AC_DriveOneSecDefaultPow();
+//    	autonomousCommand = new AC_DriveThreeSecsDefaultPow();
 //    	autonomousCommand = new AC_SpinOneSecDefaultPow();
 //    	autonomousCommand = new AC_Spin180Degrees();
         
