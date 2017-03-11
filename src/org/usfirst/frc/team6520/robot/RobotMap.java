@@ -29,18 +29,22 @@ public class RobotMap {
 	
 	public static VictorSP FrontLeftMotor = new VictorSP(FRONT_LEFT_MOTOR_PORT);
 	public static VictorSP FrontRightMotor = new VictorSP(FRONT_RIGHT_MOTOR_PORT);
-//	public static VictorSP BackLeftMotor = new VictorSP(BACK_LEFT_MOTOR_PORT);
-	public static Spark BackLeftMotor = new Spark(BACK_LEFT_MOTOR_PORT);
-//	public static VictorSP BackRightMotor = new VictorSP(BACK_RIGHT_MOTOR_PORT);
-	public static Spark BackRightMotor = new Spark(BACK_RIGHT_MOTOR_PORT);
+	public static VictorSP BackLeftMotor = new VictorSP(BACK_LEFT_MOTOR_PORT);
+	public static VictorSP BackRightMotor = new VictorSP(BACK_RIGHT_MOTOR_PORT);
+//	public static Spark BackLeftMotor = new Spark(BACK_LEFT_MOTOR_PORT);
+//	public static Spark BackRightMotor = new Spark(BACK_RIGHT_MOTOR_PORT);
 	
 	
-//	private final static int CLIMBING_MOTOR = 4;
-//	
-//	public static VictorSP ClimbingMotor = new VictorSP(CLIMBING_MOTOR);	
 	private final static int CLIMBING_MOTOR = 4;
 	
-	public static Spark ClimbingMotor = new Spark(CLIMBING_MOTOR);
+	public static VictorSP ClimbingMotor = new VictorSP(CLIMBING_MOTOR);
+//	
+//	public static Spark ClimbingMotor = new Spark(CLIMBING_MOTOR);
+	
+	
+	private final static int LOADING_MOTOR = 5;
+	
+	public static VictorSP LoadingMotor = new VictorSP(LOADING_MOTOR);
 	
 	
 	private final static int FORWARD_ARM_PORT = 0;

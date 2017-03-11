@@ -2,14 +2,11 @@ package org.usfirst.frc.team6520.robot.commands;
 
 import org.usfirst.frc.team6520.robot.Constants;
 import org.usfirst.frc.team6520.robot.Robot;
-import org.usfirst.frc.team6520.robot.oi.OI_Gamepad;
+import org.usfirst.frc.team6520.robot.sensors.S_Display;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
+
 public class C_DriveByOneJoystick extends Command {
 
 	double leftInput;
@@ -29,23 +26,22 @@ public class C_DriveByOneJoystick extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 
-		// the input is the sum of the default speed provided by the stick and
-		// the ramping speed added by the trigger
+//		 the input is the sum of the default speed provided by the stick and
+//		 the ramping speed added by the trigger
 
-		leftInput = (Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LX_AXIS)
-				- Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LY_AXIS))
-				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRawAxis(OI_Gamepad.R_TRIGGER)
+		leftInput = (Robot.oi.gamepad0.getLeftX()
+				- Robot.oi.gamepad0.getLeftY())
+				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRightTrigger()
 						* (Constants.FULL_POWER - Constants.DEFAULT_POWER));
 		
-		rightInput = (-Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LX_AXIS)
-				- Robot.oi.gamepad0.getRawAxis(OI_Gamepad.LY_AXIS))
-				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRawAxis(OI_Gamepad.R_TRIGGER)
+		rightInput = (-Robot.oi.gamepad0.getLeftX()
+				- Robot.oi.gamepad0.getLeftY())
+				* (Constants.DEFAULT_POWER + Robot.oi.gamepad0.getRightTrigger()
 						* (Constants.FULL_POWER - Constants.DEFAULT_POWER));
 		
 		Robot.ss_DriveTrain.drive(leftInput, rightInput);
 
-    	SmartDashboard.putNumber("angle", Robot.gyro.getAngle());
-    	SmartDashboard.putNumber("rate of rotation", Robot.gyro.getRate());
+    	S_Display.DisplayNumbers();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

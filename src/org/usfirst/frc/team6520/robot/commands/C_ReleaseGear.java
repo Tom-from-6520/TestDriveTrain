@@ -5,9 +5,7 @@ import org.usfirst.frc.team6520.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
+
 public class C_ReleaseGear extends Command {
 
     public C_ReleaseGear() {

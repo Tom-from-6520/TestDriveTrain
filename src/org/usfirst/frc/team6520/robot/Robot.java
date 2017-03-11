@@ -2,14 +2,17 @@
 package org.usfirst.frc.team6520.robot;
 
 import org.usfirst.frc.team6520.robot.autonomous_commands.AC_DriveThreeSecsDefaultPow;
-import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Example;
-import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Spin180Degrees;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Spin;
+import org.usfirst.frc.team6520.robot.autonomous_commands.AC_Test;
 import org.usfirst.frc.team6520.robot.oi.OI;
-import org.usfirst.frc.team6520.robot.subsystems.SS_Climber;
+import org.usfirst.frc.team6520.robot.oi.OI_Display;
+import org.usfirst.frc.team6520.robot.sensors.S_Display;
 import org.usfirst.frc.team6520.robot.subsystems.SS_DriveTrain;
+import org.usfirst.frc.team6520.robot.subsystems.SS_RopeClimber;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -35,9 +38,15 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	public static SS_DriveTrain ss_DriveTrain = new SS_DriveTrain();
-	public static SS_Climber ss_Climber = new SS_Climber();
+	public static SS_RopeClimber ss_RopeClimber = new SS_RopeClimber();
 	
 	public static ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
+	
+	public static AnalogInput ai = new AnalogInput(0);
+	
+	public static AnalogInput ai1 = new AnalogInput(1);
+	
+	public static AnalogInput ai2 = new AnalogInput(2);
 	
     Command autonomousCommand;
     SendableChooser<String> chooser;
@@ -63,7 +72,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser<String>();
         
         chooser.addDefault("spin", "spin");
-        chooser.addObject("spin", "spin");
+        chooser.addObject("test", "test");
         chooser.addObject("drive", "drive");
         chooser.addObject("example", "example");
         SmartDashboard.putData("Auto mode", chooser);
@@ -103,23 +112,17 @@ public class Robot extends IterativeRobot {
 		case "drive":
 			autonomousCommand = new AC_DriveThreeSecsDefaultPow();
 			break;
-		case "spin":
-			autonomousCommand = new AC_Spin180Degrees();
+		case "test":
+			autonomousCommand = new AC_Test();
 			break;
-		case "example":
-			autonomousCommand = new AC_Example();
+		case "spin":
+			autonomousCommand = new AC_Spin(60);
 			break;
 		default:
 			autonomousCommand = null;
 			break;
 		} 
-    	
-        
-//      autonomousCommand = new AC_Example();
-//    	autonomousCommand = new AC_DriveThreeSecsDefaultPow();
-//    	autonomousCommand = new AC_SpinOneSecDefaultPow();
-//    	autonomousCommand = new AC_Spin180Degrees();
-        
+    	        
         
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
@@ -147,7 +150,14 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	
+    	ss_DriveTrain.driveByTwoJoysticks();
+    	
         Scheduler.getInstance().run();
+        
+        
+        S_Display.DisplayNumbers();
+        OI_Display.DisplayNumbers();
     }
     
     /**
